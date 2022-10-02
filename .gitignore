@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+stripped_csvs/
+jobs_project.ipynb
+useless_words.ipynb
+mongo_connect.py
+resources/
+__pycache__
