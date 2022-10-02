@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 from useless_words import useless_words
 from flask import Flask, jsonify
+from mongo_connect import MONGO_URI
 
 # ============== define app =============
 app = Flask(__name__)
@@ -13,7 +14,7 @@ app = Flask(__name__)
 # ============== app middleware =========
 CORS(app)
 app.config['MONGO_CONNECT'] = False
-client = MongoClient("will be provided by admin")
+client = MongoClient(os.getenv("MONGO_URI", f"{MONGO_URI}"))
 db = client.jobs_project
 
 # ============== data tranformations ==================
@@ -38,6 +39,7 @@ def make_job_title_cache(string):
         df.rename(columns={0: "key", 1: "value"}, inplace=True)
         return df.sort_values("value", ascending=False).head(50).to_dict('records')
     except (TypeError, NameError, KeyError) as e:
+        print(e)
         return {"msg": e}
 
 
