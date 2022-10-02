@@ -17,7 +17,7 @@ app.config['MONGO_CONNECT'] = False
 
 
 # client = MongoClient(os.getenv("MONGO_URI", f"{MONGO_URI}"))
-client = MongoClient(os.getenv("MONGO_URI"))
+client = MongoClient(os.getenv("MONGO_URI", "mongodb://localhost:27017/"))
 db = client.jobs_project
 
 # ============== data tranformations ==================
