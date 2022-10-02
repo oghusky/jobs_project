@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 from useless_words import useless_words
 from flask import Flask, jsonify
-from mongo_connect import MONGO_URI
+# from mongo_connect import MONGO_URI
 
 # ============== define app =============
 app = Flask(__name__)
@@ -14,7 +14,10 @@ app = Flask(__name__)
 # ============== app middleware =========
 CORS(app)
 app.config['MONGO_CONNECT'] = False
-client = MongoClient(os.getenv("MONGO_URI", f"{MONGO_URI}"))
+
+
+# client = MongoClient(os.getenv("MONGO_URI", f"{MONGO_URI}"))
+client = MongoClient("MONGO_URI")
 db = client.jobs_project
 
 # ============== data tranformations ==================
