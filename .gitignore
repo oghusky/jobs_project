@@ -5,3 +5,4 @@ useless_words.ipynb
 mongo_connect.py
 resources/
 __pycache__
+.env

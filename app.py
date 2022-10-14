@@ -1,11 +1,17 @@
-import json
-import pandas as pd
 import os
+import sys
+import json
+import subprocess
+import pandas as pd
 from flask_cors import CORS
 from pymongo import MongoClient
+from flask import Flask, jsonify
 from bson.json_util import dumps
 from useless_words import useless_words
-from flask import Flask, jsonify
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # from mongo_connect import MONGO_URI
 
 # ============== define app =============
@@ -17,7 +23,7 @@ app.config['MONGO_CONNECT'] = False
 
 
 # client = MongoClient(os.getenv("MONGO_URI", f"{MONGO_URI}"))
-client = MongoClient(os.getenv("MONGO_URI", "mongodb://localhost:27017/"))
+client = MongoClient(os.getenv("MONGO_URI"))
 db = client.jobs_project
 
 # ============== data tranformations ==================
@@ -96,6 +102,10 @@ def make_desc_cache(string):
 
 
 # ==================== api routes =============
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify(data="hello")
+
 
 @app.route("/api/search_skill/<skill>", methods=["GET"])
 def search_skill(skill):
